@@ -1,0 +1,23 @@
+{
+  "name": "index.js",
+  "version": "1.0.0",
+  "description": "Modern Ecommerce with Node js",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "author": "Onah Stephen",
+  "license": "MIT",
+  "dependencies": {
+    "bcrypt": "^5.1.0",
+    "dotenv": "^16.1.4",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.0",
+    "mongoose": "^7.2.2",
+    "morgan": "^1.10.0",
+    "stripe": "^12.10.0",
+    "stripe-cli": "stripe/stripe-cli",
+    "twilio": "^4.11.2"
+  }
+}
