@@ -1,5 +1,15 @@
 const router = require('express').Router()
-const { deleteProduct, productReview, getAllProducts, addToWishlist, getAllProductsReview, getSingleProduct, addProduct, updateProduct, updateProductReview } = require('../../controllers/admin/Product')
+const { 
+    deleteProduct,
+    productReview, 
+    getAllProducts, 
+    addToWishlist, 
+    getAllProductsReview, 
+    getSingleProduct, 
+    addProduct, 
+    updateProduct, 
+    updateProductReview 
+} = require('../../controllers/admin/Product')
 const { isAuthenticated } = require('../../middleware/operations')
 
 router.post('/', isAuthenticated, addProduct)

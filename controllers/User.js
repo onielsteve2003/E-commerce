@@ -320,6 +320,46 @@ exports.getAllUserWishlist = async(req, res) => {
     }
 }
 
+exports.recentlyViewedProduct = async (req, res) => {
+    try {
+        const { productId } = req.params;
+        const { userId } = req.body;
+
+        const user = await User.findById(userId);
+        
+        // Check if the product is already in the recently viewed list
+        if (!user.recentlyViewed.includes(productId)) {
+            // Add the product to the recently viewed list
+            user.recentlyViewed.push(productId);
+
+            // Limit the recently viewed list to a certain number, e.g., 10
+            if (user.recentlyViewed.length > 10) {
+                user.recentlyViewed.shift(); // Remove the oldest product
+            }
+
+            await user.save();
+            res.status(200).json({ message: 'Product added to recently viewed list' });
+        } else {
+            res.status(400).json({ error: 'Product already in recently viewed list' });
+        }
+    } catch (error) {
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+};
+
+exports.clearRecentlyViewed = async (req, res) => {
+    try {
+        const { userId } = req.body;
+
+        const user = await User.findById(userId);
+        user.recentlyViewedProducts = [];
+        await user.save();
+
+        res.status(200).json({ message: 'Recently viewed products cleared successfully' });
+    } catch (error) {
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+};
 
 exports.logout = (req, res) => {
     res.clearCookie("accessToken",{

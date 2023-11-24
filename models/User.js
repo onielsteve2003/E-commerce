@@ -31,7 +31,13 @@ const userSchema = mongoose.Schema({
         type: String,
         enum: ["user", "admin", "superadmin"],
         default: "admin"
-    }
+    },
+    recentlyViewed: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Product',
+        },
+    ],
 }, { timestamps: true })
 
 userSchema.pre('save', function (next) {
